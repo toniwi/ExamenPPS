@@ -1,0 +1,44 @@
+version: '3'
+services:
+  tomcat:
+	build:
+	image: tomcat:latest
+	volumes:
+  	- ./sample.war:/usr/local/tomcat/webapps/sample.war
+	network_mode: "redgninx"
+	container_name: aplicacionjava
+
+  nginx:
+	build:
+	image: nginx:latest
+	ports:
+  	- "80:80"
+	volumes:
+  	- ./default.conf:/etc/nginx/conf.d/default.conf
+	network_mode: "redgninx"
+	container_name: proxy_name
+
+networks:
+  network_name:
+	driver: bridge
+
+version: '3'
+services:
+  tomcat:
+	image: tomcat:9.0
+	volumes:
+  	- ./sample.war:/usr/local/tomcat/webapps/sample.war
+	network_mode: "redgninx"
+	container_name: aplicacionjava
+
+  nginx:
+	image: nginx
+	ports:
+  	- "80:80"
+	volumes:
+  	- ./default.conf:/etc/nginx/conf.d/default.conf
+	network_mode: "redgninx"
+	container_name: proxy_name
+
+networks:
+  rednginx
